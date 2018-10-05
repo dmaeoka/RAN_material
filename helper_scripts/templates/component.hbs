@@ -1,0 +1,30 @@
+{{#if haveStyle}}
+import withStyles from '@material-ui/core/styles/withStyles';
+import {{filename}}Style from './styles';
+{{/if}}
+{{#if haveStore}}
+import connect from './store';
+{{/if}}
+
+const {{filename}} = props => {
+  const { classes } = props; // eslint-disable-line
+  {{#if haveStyle}}
+  return <div className={classes.section}>{{filename}}</div>;
+  {{else}}
+  return <div>{{filename}}</div>;
+  {{/if}}
+};
+
+{{#if haveStyle}}
+  {{#if haveStore}}
+export default connect(withStyles({{filename}}Style)({{filename}}));
+  {{else}}
+export default withStyles({{filename}}Style)({{filename}});
+  {{/if}}
+{{else}}
+  {{#if haveStore}}
+export default connect({{filename}});
+  {{else}}
+export default {{filename}};
+  {{/if}}
+{{/if}}
